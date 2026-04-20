@@ -1,7 +1,4 @@
 ARG BUILD_FROM=ghcr.io/home-assistant/base:latest
-
-ARG BUILD_VERSION=v1.139.0
-
 FROM $BUILD_FROM
 
 # LABEL \
@@ -17,6 +14,7 @@ FROM $BUILD_FROM
 COPY start-victoria-metrics /
 COPY prometheus.tpl /
 WORKDIR /share/victoria-metrics-data
+ARG BUILD_VERSION=v1.139.0
 
 RUN /bin/bash -c 'set -ex && \
     ARCH=$(uname -m) && \
