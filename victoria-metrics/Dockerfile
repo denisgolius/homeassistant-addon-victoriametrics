@@ -1,11 +1,23 @@
-ARG BUILD_FROM
+ARG BUILD_FROM=ghcr.io/home-assistant/base:latest
+ARG BUILD_ARCH
+ARG BUILD_VERSION
+ARG VERSION=v1.139.0
+
 FROM $BUILD_FROM
+
+LABEL \
+    io.hass.name="VictoriaMetrics" \
+    io.hass.description="VictoriaMetrics Add-on for Home Assistant OS" \
+    io.hass.arch="${BUILD_ARCH}" \
+    io.hass.type="addon" \
+    io.hass.version="${BUILD_VERSION}" \
+    io.hass.url="https://github.com/VictoriaMetrics-Community/homeassistant-addon-victoriametrics" \
+    maintainer="VictoriaMetrics-Community"
 
 # Copy data for add-on
 COPY start-victoria-metrics /
 COPY prometheus.tpl /
 WORKDIR /share/victoria-metrics-data
-ARG VERSION=v1.139.0
 
 RUN /bin/bash -c 'set -ex && \
     ARCH=$(uname -m) && \
