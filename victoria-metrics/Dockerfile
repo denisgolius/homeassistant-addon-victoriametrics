@@ -1,7 +1,6 @@
-ARG BUILD_FROM
+ARG BUILD_FROM=ghcr.io/home-assistant/base:latest
 FROM $BUILD_FROM
 
-# Copy data for add-on
 COPY start-victoria-metrics /
 COPY prometheus.tpl /
 WORKDIR /share/victoria-metrics-data
